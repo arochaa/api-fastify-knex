@@ -1,0 +1,30 @@
+{
+  "name": "api-fastify-knex",
+  "version": "1.0.0",
+  "description": "API com Fastify e knex (ORM)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arochaa/api-fastify-knex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arochaa/api-fastify-knex/issues"
+  },
+  "homepage": "https://github.com/arochaa/api-fastify-knex#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "standard": "^16.0.3"
+  },
+  "dependencies": {
+    "fastify": "^3.21.0",
+    "fastify-swagger": "^4.11.0",
+    "uuid": "^8.3.2"
+  }
+}
