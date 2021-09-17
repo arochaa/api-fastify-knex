@@ -1,4 +1,4 @@
-let items = require('../data')
+let items = require('../../data')
 const { v4: uuidv4 } = require('uuid')
 
 const getItems = (req, reply) => {
@@ -7,7 +7,7 @@ const getItems = (req, reply) => {
 
 const getItem = (req, reply) => {
   const { id } = req.params
-  const item = items.find((item) => item.id === Number(id))
+  const item = items.find((item) => item.id === id)
 
   reply.send(item)
 }
