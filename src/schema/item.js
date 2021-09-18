@@ -10,6 +10,8 @@ const Item = {
 
 const getItemsOpts = {
   schema: {
+    description: 'Endpoint for list all user',
+    tags: ['user'],
     response: {
       200: {
         type: 'array',
@@ -22,6 +24,8 @@ const getItemsOpts = {
 
 const getItemOpts = {
   schema: {
+    description: 'Endpoint for list single user',
+    tags: ['user'],
     response: {
       200: Item
     }
@@ -31,6 +35,8 @@ const getItemOpts = {
 
 const postItemOpts = {
   schema: {
+    description: 'Endpoint for insert single user',
+    tags: ['user'],
     body: {
       type: 'object',
       required: ['name'],
@@ -47,6 +53,8 @@ const postItemOpts = {
 
 const deleteItemOpts = {
   schema: {
+    description: 'Endpoint for delete single user',
+    tags: ['user'],
     response: {
       200: {
         type: 'object',
@@ -61,6 +69,8 @@ const deleteItemOpts = {
 
 const updateItemOpts = {
   schema: {
+    description: 'Endpoint for update single user',
+    tags: ['user'],
     body: {
       type: 'object',
       required: ['name'],
