@@ -1,0 +1,54 @@
+version: "3.7"
+services:
+  app:
+    build: .
+    command: npm run dev
+    container_name: app-backend
+    restart: unless-stopped
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1024m
+    volumes:
+      - .:/usr/src/app
+    environment:
+      DATABASE_USERNAME: app
+      DATABASE_PASSWORD: app
+      DATABASE_PORT: 5432
+      DATABASE_DB: app_db
+      SERVER_PORT: 3001
+    ports:
+      - 3001:3001
+    depends_on:
+      - db
+      
+  db:
+    container_name: app-database
+    restart: unless-stopped
+    image: postgres
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: app_db
+      PGDATA: /data/postgres
+    volumes:
+       - ./database:/data/postgres
+    ports:
+      - 5433:5432
+ 
+  pgadmin:
+    container_name: app-pgadmin
+    restart: unless-stopped
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: arocha.dev@outlook.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - 16543:80
+    depends_on:
+      - db
+
+volumes:
+    app:
+    db:
