@@ -1,14 +1,16 @@
-const fastify = require('fastify')({ logger: true })
+const Fastify = require('fastify').default
 const { createTableUser } = require('./model/createTableUser')
 const swagger = require('../src/config/swagger')
+// const env = process.env.NODE_ENV || 'development'
 
-/**
- * Criando as tabelas e dados
- */
+// const knex = require('../src/config/knexfile')[env]
+const fastify = Fastify(({ logger: true }))
+
 createTableUser()
 
 fastify.register(require('fastify-swagger'), swagger)
-fastify.register(require('./routes/item'))
+// fastify.register(require('fastify-knexjs'), knex, (err) => console.error(err))
+fastify.register(require('./routes/user'))
 
 const PORT = process.env.SERVER_PORT || 9999
 
@@ -22,3 +24,5 @@ const start = async () => {
 }
 
 start()
+
+module.exports = { fastify }

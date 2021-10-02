@@ -19,12 +19,13 @@
   },
   "homepage": "https://github.com/arochaa/api-fastify-knex#readme",
   "devDependencies": {
+    "@types/node": "^16.9.2",
     "nodemon": "^2.0.12",
     "standard": "^16.0.3"
   },
   "dependencies": {
     "fastify": "^3.21.0",
-    "fastify-knex": "^0.1.1",
+    "fastify-knexjs": "^1.4.0",
     "fastify-swagger": "^4.11.0",
     "knex": "^0.95.11",
     "pg": "^8.7.1",
