@@ -5,7 +5,7 @@ class User {
   }
 
   get () {
-    return db(this.db)
+    return db(this.db).orderBy('id', 'asc')
   }
 
   getOne (data) {

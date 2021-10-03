@@ -1,6 +1,6 @@
 const { getUsersOpts, getUserOpts, postUserOpts, deleteUserOpts, updateUserOpts } = require('../schema/user')
 
-const itemRoute = (fastify, option, done) => {
+const userRoute = (fastify, option, done) => {
   // Get all Items
   fastify.get('/user', getUsersOpts)
 
@@ -19,4 +19,4 @@ const itemRoute = (fastify, option, done) => {
   done()
 }
 
-module.exports = itemRoute
+module.exports = userRoute
