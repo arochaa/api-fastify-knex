@@ -21,8 +21,7 @@ services:
     ports:
       - 3001:3001
     depends_on:
-      - db
-      
+      - db 
   db:
     container_name: app-database
     restart: unless-stopped
@@ -36,7 +35,6 @@ services:
        - ./database:/data/postgres
     ports:
       - 5433:5432
- 
   pgadmin:
     container_name: app-pgadmin
     restart: unless-stopped

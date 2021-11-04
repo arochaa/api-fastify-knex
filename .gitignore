@@ -1,3 +1,7 @@
+# Data
+database/
+src
+
 # Logs
 logs
 *.log

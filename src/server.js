@@ -1,22 +1,14 @@
-const fastify = require('fastify')({ logger: true })
-const { createTableUser } = require('./model/createTableUser')
-const swagger = require('../src/config/swagger')
+const server = require('./app')
+const { createTableUser } = require('./model/dataInit')
 
-/**
- * Criando as tabelas e dados
- */
-createTableUser()
-
-fastify.register(require('fastify-swagger'), swagger)
-fastify.register(require('./routes/item'))
-
-const PORT = process.env.SERVER_PORT || 9999
+const PORT = process.env.SERVER_PORT || 3001
 
 const start = async () => {
   try {
-    await fastify.listen(PORT, '::')
+    await server.listen(PORT, '::')
+    createTableUser()
   } catch (error) {
-    fastify.log.error(error)
+    server.log.error(error)
     process.exit(1)
   }
 }

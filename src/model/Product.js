@@ -1,7 +1,7 @@
 const db = require('../config/db')
-class User {
+class Product {
   constructor () {
-    this.db = 'user'
+    this.db = 'product'
   }
 
   get () {
@@ -25,4 +25,4 @@ class User {
   }
 }
 
-module.exports = User
+module.exports = Product
