@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon src/server"
+    "dev": "nodemon src/server",
+    "container:up": "docker-compose down -v && docker-compose up -d",
+    "container:down": "docker-compose down -v",
+    "container:clear": "docker rm -f $(docker ps -a --format '{{ .ID }}')",
+    "container:ps": "docker ps -a --format '{{ .ID }}\t{{.Status}}\t{{ .Names }}'"
   },
   "repository": {
     "type": "git",
