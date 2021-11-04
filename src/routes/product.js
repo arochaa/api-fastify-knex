@@ -1,14 +1,14 @@
-const { getProductOpts } = require('../schema/product')
+const { getProductsOpts, getProductOpts, postProduct } = require('../schema/product')
 
 const productRoute = (fastify, option, done) => {
   // Get all Items
-  fastify.get('/product', getProductOpts)
+  fastify.get('/product', getProductsOpts)
 
   // // Get single Item
-  // fastify.get('/user/:id', getUserOpts)
+  fastify.get('/product/:id', getProductOpts)
 
   // // Post single Item
-  // fastify.post('/user', postUserOpts)
+  fastify.post('/product', postProduct)
 
   // // Delete single Item
   // fastify.delete('/user/:id', deleteUserOpts)

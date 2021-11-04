@@ -1,6 +1,8 @@
 const User = require('../model/User')
+const HttpResponse = require('../helpers/responseHttp')
 
 const user = new User()
+const response = new HttpResponse()
 
 const listUsers = async (req, reply) => {
   return await user.get()
@@ -18,8 +20,9 @@ const createUser = async (req, reply) => {
 
   if (checkUserExist.length >= 1) return { message: `Email ${data.email}, exist in database` }
 
-  await user.create(data)
-  reply.code(201).send(data)
+  const create = await user.create(data)
+
+  return response.serverSuccess(create)
 }
 
 const deleteUser = async (req, reply) => {

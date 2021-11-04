@@ -3,50 +3,61 @@ const Product = require('../model/Product')
 const product = new Product()
 
 const listProducts = async (req, reply) => {
-  return await product.get()
+  try {
+    return await product.get()
+  } catch (err) {
+    console.log(err)
+    return err
+  }
 }
 
-// const listUser = async (req, reply) => {
-//   const { id } = req.params
-//   return await user.getOne(id)
-// }
+const listProduct = async (req, reply) => {
+  const { id } = req.params
+  const sql = (await product.getOne(id)).shift()
 
-// const createUser = async (req, reply) => {
-//   const data = req.body
-//   const where = { email: data.email }
-//   const checkUserExist = await user.getOne(where)
+  return sql
+}
 
-//   if (checkUserExist.length >= 1) return { message: `Email ${data.email}, exist in database` }
+const createProduct = async (req, reply) => {
+  const data = req.body
+  const where = { cd_product: data.cd_product }
 
-//   await user.create(data)
-//   reply.code(201).send(data)
-// }
+  const checkUserExist = await product.getOne(where)
 
-// const deleteUser = async (req, reply) => {
-//   const data = req.params
-//   const checkUser = await user.getOne(data)
+  if (checkUserExist.length >= 1) return { message: `Product ${data.cd_product}, already exists` }
 
-//   if (checkUser.length < 1) return { message: `User with id ${data.id}, not exist` }
+  const id = await product.create(data)
 
-//   await user.delete(data)
-//   reply.send({ message: `Delete id ${data.id} success` })
-// }
+  console.log({ id: id.shift() })
 
-// const updateUser = async (req, reply) => {
-//   const data = req.body
-//   const where = req.params
-//   const checkuser = await user.getOne(where)
+  reply.send({ id: id.shift() }).code(201)
+}
 
-//   if (checkuser.length < 1) return { message: `User with id ${where.id}, not exist` }
+const deleteProduct = async (req, reply) => {
+  const data = req.params
+  const checkUser = await product.getOne(data)
 
-//   await user.update(data, where)
-//   reply.send({ message: `Item ${where.id} updated` })
-// }
+  if (checkUser.length < 1) return { message: `User with id ${data.id}, not exist` }
+
+  await product.delete(data)
+  reply.send({ message: `Delete id ${data.id} success` })
+}
+
+const updateProduct = async (req, reply) => {
+  const data = req.body
+  const where = req.params
+  const checkuser = await product.getOne(where)
+
+  if (checkuser.length < 1) return { message: `User with id ${where.id}, not exist` }
+
+  await product.update(data, where)
+  reply.send({ message: `Item ${where.id} updated` })
+}
 
 module.exports = {
-  listProducts
-  // listUser,
-  // createUser,
-  // deleteUser,
-  // updateUser
+  listProducts,
+  listProduct,
+  createProduct,
+  deleteProduct,
+  updateProduct
 }
