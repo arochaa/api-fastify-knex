@@ -1,8 +1,6 @@
 const Fastify = require('fastify').default
 const swagger = require('../src/config/swagger')
-// const env = process.env.NODE_ENV || 'development'
 
-// const knex = require('../src/config/knexfile')[env]
 const fastify = Fastify(({ logger: true }))
 const user = require('./routes/user')
 const product = require('./routes/product')

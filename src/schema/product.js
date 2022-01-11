@@ -57,7 +57,9 @@ const postProduct = {
       201: {
         type: 'object',
         properties: {
-          id: { type: 'number' }
+          message: { type: 'string' },
+          statusCode: { type: 'number' },
+          info: { type: 'string' }
         }
       }
     }
@@ -87,7 +89,7 @@ const updateProductOpts = {
     tags: ['product'],
     body: {
       type: 'object',
-      required: ['id'],
+      required: ['cd_product'],
       properties: {
         id: { type: 'number' }
       }

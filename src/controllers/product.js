@@ -1,6 +1,8 @@
 const Product = require('../model/Product')
+const HttpResponse = require('../helpers/responseHttp')
 
 const product = new Product()
+const httpResponse = new HttpResponse()
 
 const listProducts = async (req, reply) => {
   try {
@@ -13,9 +15,9 @@ const listProducts = async (req, reply) => {
 
 const listProduct = async (req, reply) => {
   const { id } = req.params
-  const sql = (await product.getOne(id)).shift()
+  const sql = await product.getOne(id)
 
-  return sql
+  return sql.shift()
 }
 
 const createProduct = async (req, reply) => {
@@ -26,11 +28,9 @@ const createProduct = async (req, reply) => {
 
   if (checkUserExist.length >= 1) return { message: `Product ${data.cd_product}, already exists` }
 
-  const id = await product.create(data)
+  const id = await (await product.create(data)).shift().toString()
 
-  console.log({ id: id.shift() })
-
-  reply.send({ id: id.shift() }).code(201)
+  reply.code(201).send(httpResponse.serverSuccess(id))
 }
 
 const deleteProduct = async (req, reply) => {
@@ -45,13 +45,16 @@ const deleteProduct = async (req, reply) => {
 
 const updateProduct = async (req, reply) => {
   const data = req.body
-  const where = req.params
-  const checkuser = await product.getOne(where)
+  const { id } = req.params
 
-  if (checkuser.length < 1) return { message: `User with id ${where.id}, not exist` }
+  if (!id) return { message: 'Params in URL is not null' }
 
-  await product.update(data, where)
-  reply.send({ message: `Item ${where.id} updated` })
+  const checkuser = await product.getOne({ id })
+
+  if (checkuser.length < 1) return { message: `Product with id ${id}, not exist` }
+
+  await product.update(data, { id })
+  reply.send({ message: `Item ${id} updated` })
 }
 
 module.exports = {

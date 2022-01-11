@@ -2,7 +2,7 @@ class HttpResponse {
   serverSuccess (params = null) {
     return {
       message: 'Success',
-      statusCode: 200,
+      statusCode: 201,
       info: params
     }
   }

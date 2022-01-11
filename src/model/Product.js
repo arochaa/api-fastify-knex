@@ -8,8 +8,8 @@ class Product {
     return db(this.db).orderBy('id', 'asc')
   }
 
-  getOne (data) {
-    return db(this.db).where(data)
+  getOne (id) {
+    return db(this.db).where(id)
   }
 
   create (data) {
